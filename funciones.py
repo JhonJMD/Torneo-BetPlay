@@ -58,10 +58,10 @@ def regFecha():
                                 print('Dato no valido')
                             else:
                                 if goles >= 0:
-                                    item[5] = goles
+                                    item[5] += goles
                                     if (i == 1):
-                                        Equipos[aux-1][6] = goles
-                                        Equipos[equipo-1][6]= aux2 
+                                        Equipos[aux-1][6] += goles
+                                        Equipos[equipo-1][6] += aux2 
                                         if goles > aux2:
                                             Equipos[equipo-1][2]+=1
                                             Equipos[aux-1][3]+=1
@@ -82,7 +82,54 @@ def regFecha():
     os.system('pause')
 
 def reporte():
+    maxG = -1
+    maxP = -1
+    maxPG = -1
+    sumEqui = 0
+    sumPart = 0
     os.system('cls')
     t.headerReportes()
-    print(Equipos)
+    for i, item in enumerate(Equipos):
+        actualG = Equipos[i][5]
+        actualP = Equipos[i][7]
+        actualPG = Equipos[i][2]
+        sumEqui+=Equipos[i][5]
+        sumPart+=Equipos[i][1]
+        if actualG > maxG:
+            maxG = actualG
+            maxgolE = item[0]
+        if actualP > maxP:
+            maxP = actualP
+            maxPun = item[0]
+        if actualPG > maxPG:
+            maxPG = actualPG
+            maxPar = item[0]
+    promGol = sumEqui/sumPart    
+    isReport = True
+    while isReport:
+        try:
+            m.menuReport()
+            op = input(': ').upper()
+        except ValueError:
+            print('Dato erroneo')
+        else:
+            if (op == 'A'):
+                print(f'Equipo que mas goles anoto {maxgolE}')
+                os.system('pause')
+            elif (op == 'B'):
+                print(f'Equipo que mas puntos tiene {maxPun}')
+                os.system('pause')
+            elif (op == 'C'):
+                print(f'Equipo que mas partidos gano {maxPar}')
+                os.system('pause')
+            elif (op == 'D'):
+                print(f'Total de goles anotados {sumEqui}')
+                os.system('pause')
+            elif (op == 'E'):
+                print(f'Promedio de goles anotados {promGol}')
+                os.system('pause')
+            elif (op == 'F'):
+                isReport = False
+            else:
+                print('Dato no valido')
     os.system('pause')

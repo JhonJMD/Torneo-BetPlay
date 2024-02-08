@@ -24,6 +24,5 @@ if __name__ == '__main__':
                 os.system('cls')
                 print('Gracias por utilizar nuestro sistema')
                 isActive = False
-                print(fun.Equipos)
                 os.system('pause')
             
